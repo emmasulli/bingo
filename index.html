@@ -28,7 +28,6 @@
             position: relative;
         }
 
-
         .header {
             text-align: center;
             margin-bottom: 20px;
@@ -37,7 +36,7 @@
         .header h1 {
             color: #FF0000;
             font-size: 2.5em;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
         }
 
         .bingo-grid {
@@ -62,7 +61,7 @@
             background: white;
             border-radius: 4px;
             transition: background-color 0.3s;
-            height: 140px;
+            height: 140px; /* Fixed height reintroduced */
             font-size: 16px;
             word-wrap: break-word;
             overflow: hidden;
@@ -74,7 +73,7 @@
         }
 
         .bingo-cell:hover {
-            b ackground-color: #f0f0f0;
+            background-color: #f0f0f0;
         }
 
         button {
@@ -93,6 +92,39 @@
         button:hover {
             background-color: #0056b3;
         }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .bingo-grid {
+                grid-template-columns: repeat(2, 1fr); /* Change to 2 columns */
+                gap: 10px; /* Reduce gap for smaller screens */
+            }
+
+            .bingo-cell {
+                height: 120px; /* Adjust fixed height for smaller screens */
+                font-size: 14px; /* Adjust font size */
+            }
+
+            button {
+                font-size: 14px; /* Adjust button font size */
+                padding: 10px; /* Adjust button padding */
+            }
+
+            .header h1 {
+                font-size: 1.8em; /* Scale down header font size */
+            }
+        }
+
+        @media (max-width: 400px) {
+            .bingo-grid {
+                grid-template-columns: repeat(1, 1fr); /* Change to 1 column for very small screens */
+            }
+
+            .bingo-cell {
+                height: 100px; /* Further adjust fixed height */
+                font-size: 12px; /* Adjust font size */
+            }
+        }
     </style>
 </head>
 <body>
@@ -108,14 +140,14 @@
 
     <script>
         const names = [
-            "Snow","Return to small hometown", "Business in trouble",
-            "Mistletoe","Fancy house","Gingerbread","Baking together","Finding the perfect tree","Decorating the christmas tree",
-            "Cynical character", "Widow", "Dead parent", "Inviting fireplace","Irritating children", "Royalty" , "Hot chocolate",
+            "Snow", "Return to small hometown", "Business in trouble",
+            "Mistletoe", "Fancy house", "Gingerbread", "Baking together", "Finding the perfect tree", "Decorating the christmas tree",
+            "Cynical character", "Widow", "Dead parent", "Inviting fireplace", "Irritating children", "Royalty", "Hot chocolate",
             "Peppermint tea", "Plot twist", "Charity event", "Cookies", "Fairy lights", "Supernatural character", "Candy cane",
             "Carol singers", "Artist/ writer/ designer", "Wreath", "Interrupted romantic frisson", "Wise advice from old people",
-            "Heir to inherit fortune/ company","Grumpy business person", "Interfering parents", "Scottish/ Irish/ English elements","Christmas eve deadline",
-            "flashback to childhood","Main character stressing about work", "Airport scene", "Ex reappears", "Coffee shop or Diner", "An almost kiss", 
-            "An accident, slip or spill", "A family tradition", "Character sworn off love", "Winter festival","Single parent","Recital/ pageant/ performance", 
+            "Heir to inherit fortune/ company", "Grumpy business person", "Interfering parents", "Scottish/ Irish/ English elements", "Christmas eve deadline",
+            "Flashback to childhood", "Main character stressing about work", "Airport scene", "Ex reappears", "Coffee shop or Diner", "An almost kiss", 
+            "An accident, slip or spill", "A family tradition", "Character sworn off love", "Winter festival", "Single parent", "Recital/ pageant/ performance", 
             "Fluffy socks", "Christmas jumper", "Kiss", "Family business"
         ];
 
