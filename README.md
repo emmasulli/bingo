@@ -1,2 +1,2 @@
 # bingo
-Christma bingo
+Christmas bingo
