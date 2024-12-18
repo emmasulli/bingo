@@ -137,48 +137,71 @@
         
         <button onclick="generateNewCard()">Generate New Card</button>
     </div>
+    <footer>
+        <p style="text-align: center; margin-top: 20px; font-size: 10px; color: #555;">
+            🎄 This idea originated from the master list collated and shared by Helen and was made for Helen, Keiran, Louise and Becky 🎄
+        </p>
+    </footer>
 
-    <script>
-        const names = [
-            "Snow", "Return to small hometown", "Business in trouble",
-            "Mistletoe", "Fancy house", "Gingerbread", "Baking together", "Finding the perfect tree", "Decorating the christmas tree",
-            "Cynical character", "Widow", "Dead parent", "Inviting fireplace", "Irritating children", "Royalty", "Hot chocolate",
-            "Peppermint tea", "Plot twist", "Charity event", "Cookies", "Fairy lights", "Supernatural character", "Candy cane",
-            "Carol singers", "Artist/ writer/ designer", "Wreath", "Interrupted romantic frisson", "Wise advice from old people",
-            "Heir to inherit fortune/ company", "Grumpy business person", "Interfering parents", "Scottish/ Irish/ English elements", "Christmas eve deadline",
-            "Flashback to childhood", "Main character stressing about work", "Airport scene", "Ex reappears", "Coffee shop or Diner", "An almost kiss", 
-            "An accident, slip or spill", "A family tradition", "Character sworn off love", "Winter festival", "Single parent", "Recital/ pageant/ performance", 
-            "Fluffy socks", "Christmas jumper", "Kiss", "Family business"
+
+<script>
+    // Categories for Bingo
+    const categories = {
+        category1: ["Snow", "Christmas jumper", "Kiss", "Family business", "Carol singers", "Business in trouble", "Mistletoe", "Fancy house", "Inviting fireplace", "Finding the perfect tree", "Decorating the Christmas tree", "Wreath", "Fluffy socks", "Fairy lights", "Festive garlands", "Interrupted romantic frisson", "Wise advice from old people", "flashback to childhood", "Coffee shop or Diner", "An almost kiss"],
+        category2: ["Charity event", "Recital/pageant/performance", "Plot twist", "Christmas eve deadline", "Winter festival", "Skiing/ ice skating", "An accident, slip or spill", "A family tradition", "Airport scene", "Mild peril"],
+        category3: ["Gingerbread", "Baking together", "Hot chocolate", "Peppermint tea", "Cookies", "Candy cane", "Mulled anything"],
+        category4: ["Cynical character", "Widow", "Tragic backstory", "Irritating children", "Grumpy business person", "Interfering parents", "Supernatural character", "Ex reappears", "Single parent"],
+        category5: ["Royalty", "Artist/ writer/ designer", "Heir to inherit throne/ fortune/ company", "Scottish/ Irish/ English elements", "Main character stressing about work", "Character sworn off love", "Return to small hometown"]
+    };
+
+    // Function to shuffle an array
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    // Function to get random items from an array
+    function getRandomItems(array, count) {
+        if (array.length < count) {
+            console.warn("Not enough items in the array to select.");
+            return array; // Return the whole array if count exceeds available items
+        }
+        return shuffleArray([...array]).slice(0, count);
+    }
+
+    // Function to generate a new bingo card
+    function generateNewCard() {
+        const grid = document.getElementById('bingoGrid');
+        grid.innerHTML = ''; // Clear existing grid
+
+        // Select items from each category
+        const selectedItems = [
+            ...getRandomItems(categories.category1, 5), // 5 items from category1
+            ...getRandomItems(categories.category2, 1), // 1 item from category2
+            ...getRandomItems(categories.category3, 1), // 1 item from category3
+            ...getRandomItems(categories.category4, 1), // 1 item from category4
+            ...getRandomItems(categories.category5, 1)  // 1 item from category5
         ];
 
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-            return array;
-        }
+        // Shuffle and arrange the items in the grid
+        const shuffledItems = shuffleArray(selectedItems);
 
-        function generateNewCard() {
-            const grid = document.getElementById('bingoGrid');
-            grid.innerHTML = '';
-            
-            const shuffledNames = shuffleArray([...names]);
-            const selectedNames = shuffledNames.slice(0, 9);
-
-            selectedNames.forEach(name => {
-                const cell = document.createElement('div');
-                cell.className = 'bingo-cell';
-                cell.textContent = name;
-                cell.addEventListener('click', () => {
-                    cell.classList.toggle('selected');
-                });
-                grid.appendChild(cell);
+        shuffledItems.forEach(item => {
+            const cell = document.createElement('div');
+            cell.className = 'bingo-cell';
+            cell.textContent = item;
+            cell.addEventListener('click', () => {
+                cell.classList.toggle('selected');
             });
-        }
+            grid.appendChild(cell);
+        });
+    }
 
-        // Generate initial card
-        generateNewCard();
-    </script>
+    // Generate the initial card
+    generateNewCard();
+</script>
 </body>
 </html>
